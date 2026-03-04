@@ -1,12 +1,39 @@
 import React from 'react';
-import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import { GatsbyImage, getImage, type IGatsbyImageData } from 'gatsby-plugin-image';
 import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { FaRegLightbulb } from 'react-icons/fa';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
 
+interface TestimonialsQuery {
+  allFile: {
+    nodes: Array<{
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData;
+      } | null;
+    }>;
+  };
+}
+
+const query = graphql`
+  query TestimonialsQuery {
+    allFile(
+      filter: {
+        ext: { regex: "/(jpg)|(png)|(jpeg)/" }
+        name: { in: ["testimonial-1", "testimonial-2"] }
+      }
+    ) {
+      nodes {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED, placeholder: TRACED_SVG)
+        }
+      }
+    }
+  }
+`;
+
 const Testimonials = () => {
-  const data = useStaticQuery(query);
+  const data = useStaticQuery<TestimonialsQuery>(query);
   const testimonials = data.allFile.nodes;
 
   return (
@@ -48,31 +75,14 @@ const Testimonials = () => {
         </ColumnOne>
         <ColumnTwo>
           {testimonials.map((image, index) => {
-            const pathToImage = getImage(image);
-            return <Images image={pathToImage} key={index} />;
+            const pathToImage = getImage(image as { childImageSharp: { gatsbyImageData: IGatsbyImageData } });
+            return <Images image={pathToImage!} key={index} alt="" />;
           })}
         </ColumnTwo>
       </ContentWrapper>
     </TestimonialsContainer>
   );
 };
-
-const query = graphql`
-  query TestimonialsQuery {
-    allFile(
-      filter: {
-        ext: { regex: "/(jpg)|(png)|(jpeg)/" }
-        name: { in: ["testimonial-1", "testimonial-2"] }
-      }
-    ) {
-      nodes {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED, placeholder: TRACED_SVG)
-        }
-      }
-    }
-  }
-`;
 
 export default Testimonials;
 
@@ -90,6 +100,7 @@ const TopLine = styled.p`
   padding-left: 2rem;
   margin-bottom: 0.75rem;
 `;
+
 const Description = styled.p`
   text-align: start;
   padding-left: 2rem;
@@ -107,6 +118,7 @@ const ContentWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `;
+
 const ColumnOne = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr;
@@ -126,6 +138,7 @@ const Testimonial = styled.div`
     color: #3b3b3b;
   }
 `;
+
 const ColumnTwo = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -5,26 +5,24 @@ import { FaBars } from 'react-icons/fa';
 import { menuData } from '../data/MenuData';
 import { Button } from './Button';
 
-const Header = () => {
-  return (
-    <Nav>
-      <NavLink to='/'>EXPLORIX</NavLink>
-      <Bars />
-      <NavMenu>
-        {menuData.map((item, index) => (
-          <NavLink to={item.link} key={index}>
-            {item.title}
-          </NavLink>
-        ))}
-      </NavMenu>
-      <NavBtn>
-        <Button primary='true' round='true' to='/trips'>
-          Book a Flight
-        </Button>
-      </NavBtn>
-    </Nav>
-  );
-};
+const Header = ({ siteTitle }: { siteTitle: string }) => (
+  <Nav>
+    <NavLink to="/">EXPLORIX</NavLink>
+    <Bars />
+    <NavMenu>
+      {menuData.map((item, index) => (
+        <NavLink to={item.link} key={index}>
+          {item.title}
+        </NavLink>
+      ))}
+    </NavMenu>
+    <NavBtn>
+      <Button primary round to="/trips">
+        Book a Flight
+      </Button>
+    </NavBtn>
+  </Nav>
+);
 
 const Nav = styled.nav`
   background: transparent;

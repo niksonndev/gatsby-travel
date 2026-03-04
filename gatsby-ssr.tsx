@@ -4,6 +4,8 @@
  * See: https://www.gatsbyjs.com/docs/ssr-apis/
  */
 
-exports.onRenderBody = ({ setHtmlAttributes }) => {
+import type { GatsbySSR } from 'gatsby';
+
+export const onRenderBody: GatsbySSR['onRenderBody'] = ({ setHtmlAttributes }) => {
   setHtmlAttributes({ lang: `en` });
 };

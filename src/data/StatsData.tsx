@@ -3,46 +3,29 @@ import { GiEarthAmerica } from 'react-icons/gi';
 import { MdAirplanemodeActive, MdTimer } from 'react-icons/md';
 import { FaMoneyCheck } from 'react-icons/fa';
 
-const GiEarthAmericaIcon = () => {
-  return (
-    <GiEarthAmerica
-      css={`
-        color: #047bf1;
-      `}
-    />
-  );
-};
+export interface StatsDataItem {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+}
 
-const MdAirplanemodeActiveIcon = () => {
-  return (
-    <MdAirplanemodeActive
-      css={`
-        color: #f3a82e;
-      `}
-    />
-  );
-};
+const GiEarthAmericaIcon = () => (
+  <GiEarthAmerica css={`color: #047bf1;`} />
+);
 
-const MdTimerIcon = () => {
-  return (
-    <MdTimer
-      css={`
-        color: #f34f2e;
-      `}
-    />
-  );
-};
-const FaMoneyCheckIcon = () => {
-  return (
-    <FaMoneyCheck
-      css={`
-        color: #3af576;
-      `}
-    />
-  );
-};
+const MdAirplanemodeActiveIcon = () => (
+  <MdAirplanemodeActive css={`color: #f3a82e;`} />
+);
 
-export const StatsData = [
+const MdTimerIcon = () => (
+  <MdTimer css={`color: #f34f2e;`} />
+);
+
+const FaMoneyCheckIcon = () => (
+  <FaMoneyCheck css={`color: #3af576;`} />
+);
+
+export const StatsData: StatsDataItem[] = [
   {
     icon: <GiEarthAmericaIcon />,
     title: 'Over 100 Destinations',

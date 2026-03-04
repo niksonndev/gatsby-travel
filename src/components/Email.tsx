@@ -3,53 +3,52 @@ import styled from 'styled-components';
 import { Button } from './Button';
 import { StaticImage } from 'gatsby-plugin-image';
 
-const Email = () => {
-  return (
-    <EmailContainer>
-      <StaticImage
-        style={{
-          position: 'absolute',
-          width: '100%',
-          height: '100%',
-          zIndex: 0,
-        }}
-        src='../assets/images/email2.jpg'
-        alt='email image'
-      />
-      <EmailContent>
-        <h1>Get Acess to Exlusive Offers</h1>
-        <p>Sign up for our news below to get $100 off your first trip!</p>
-        <form action='#'>
-          <EmailFormWrap>
-            <label htmlFor='email'>
-              <input type='email' placeholder='Enter your email' id='email' />
-            </label>
-            <Button
-              as='button'
-              type='submit'
-              round
-              primary
-              css={`
-                height: 48px;
+const Email = () => (
+  <EmailContainer>
+    <StaticImage
+      style={{
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 0,
+      }}
+      src="../assets/images/email2.jpg"
+      alt="email image"
+    />
+    <EmailContent>
+      <h1>Get Acess to Exlusive Offers</h1>
+      <p>Sign up for our news below to get $100 off your first trip!</p>
+      <form action="#">
+        <EmailFormWrap>
+          <label htmlFor="email">
+            <input type="email" placeholder="Enter your email" id="email" />
+          </label>
+          <Button
+            as="button"
+            type="submit"
+            round
+            primary
+            css={`
+              height: 48px;
 
-                @media screen and (max-width: 768px) {
-                  width: 100%;
-                  min-width: 350px;
-                }
+              @media screen and (max-width: 768px) {
+                width: 100%;
+                min-width: 350px;
+              }
 
-                @media screen and (max-width: 400px) {
-                  width: 100%;
-                  min-width: 250px;
-                }
-              `}>
-              Sign Up
-            </Button>
-          </EmailFormWrap>
-        </form>
-      </EmailContent>
-    </EmailContainer>
-  );
-};
+              @media screen and (max-width: 400px) {
+                width: 100%;
+                min-width: 250px;
+              }
+            `}
+          >
+            Sign Up
+          </Button>
+        </EmailFormWrap>
+      </form>
+    </EmailContent>
+  </EmailContainer>
+);
 
 export default Email;
 

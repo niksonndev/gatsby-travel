@@ -4,8 +4,16 @@ import Footer from './Footer';
 import Header from './header';
 import { GlobalStyle } from './styles/GlobalStyles';
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
+interface SiteTitleQuery {
+  site: {
+    siteMetadata: {
+      title?: string;
+    };
+  };
+}
+
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const data = useStaticQuery<SiteTitleQuery>(graphql`
     query SiteTitleQuery {
       site {
         siteMetadata {
@@ -18,7 +26,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header siteTitle={data.site.siteMetadata?.title ?? `Title`} />
       <main>{children}</main>
       <Footer />
     </>

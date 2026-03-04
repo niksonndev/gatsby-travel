@@ -9,9 +9,9 @@ import Trips from '../components/Trips';
 
 const IndexPage = () => (
   <Layout>
-    <Seo title='Home' />
+    <Seo title="Home" />
     <Hero />
-    <Trips heading='Our Favorite Destinations' />
+    <Trips heading="Our Favorite Destinations" />
     <Testimonials />
     <Stats />
     <Email />
