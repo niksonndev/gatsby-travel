@@ -1,0 +1,1 @@
+(self.webpackChunkgatsby_travel=self.webpackChunkgatsby_travel||[]).push([[922],{9922:function(){}}]);
