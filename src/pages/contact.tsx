@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import styled from 'styled-components';
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
@@ -59,6 +59,20 @@ const ContactPage = () => {
 export const Head = () => <Seo title="Contact" />;
 
 export default ContactPage;
+
+export const query = graphql`
+  query ContactPage($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
 
 const ContactWrapper = styled.main`
   min-height: calc(100vh - 80px);

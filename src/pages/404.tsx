@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { graphql } from 'gatsby';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
@@ -17,3 +18,17 @@ const NotFoundPage = () => {
 export const Head = () => <Seo title="404" />;
 
 export default NotFoundPage;
+
+export const query = graphql`
+  query NotFoundPage($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;

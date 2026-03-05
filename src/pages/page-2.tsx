@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
@@ -19,3 +19,17 @@ const SecondPage = () => {
 export const Head = () => <Seo title="Page two" />;
 
 export default SecondPage;
+
+export const query = graphql`
+  query SecondPage($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
