@@ -6,6 +6,7 @@ const config: GatsbyConfig = {
     title: `Gatsby Travel`,
     description: `Travel website showcasing the best travel destinations and deals online.`,
     author: `Nikson Rotondaro`,
+    siteUrl: `https://niksonndev.github.io/gatsby-travel`,
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -42,6 +43,30 @@ const config: GatsbyConfig = {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `./src/data/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/locales`,
+        name: `locale`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        languages: [`pt`, `es`, `en`],
+        defaultLanguage: `pt`,
+        siteUrl: `https://niksonndev.github.io/gatsby-travel`,
+        i18nextOptions: {
+          defaultNS: `common`,
+          ns: [`common`],
+          fallbackLng: `pt`,
+          interpolation: {
+            escapeValue: false,
+          },
+        },
+        localesDir: `locales`,
       },
     },
   ],

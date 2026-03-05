@@ -1,24 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { Button } from './Button';
 import Video from '../assets/videos/travel.mp4';
 
-const Hero = () => (
-  <HeroContainer>
-    <HeroBg>
-      <VideoBg src={Video} type="video/mp4" autoPlay loop muted playsInline />
-    </HeroBg>
-    <HeroContent>
-      <HeroItems>
-        <HeroH1>Unreal Destinations</HeroH1>
-        <HeroP>Out of this world</HeroP>
-        <Button primary big round to="/trips">
-          Travel Now
-        </Button>
-      </HeroItems>
-    </HeroContent>
-  </HeroContainer>
-);
+const Hero = () => {
+  const { t } = useTranslation();
+
+  return (
+    <HeroContainer>
+      <HeroBg>
+        <VideoBg src={Video} type="video/mp4" autoPlay loop muted playsInline />
+      </HeroBg>
+      <HeroContent>
+        <HeroItems>
+          <HeroH1>{t('hero.title')}</HeroH1>
+          <HeroP>{t('hero.subtitle')}</HeroP>
+          <Button primary big round to="/trips">
+            {t('hero.cta')}
+          </Button>
+        </HeroItems>
+      </HeroContent>
+    </HeroContainer>
+  );
+};
 
 export default Hero;
 

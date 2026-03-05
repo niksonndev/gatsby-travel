@@ -1,21 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { StatsData } from '../data/StatsData';
 
-const Stats = () => (
-  <StatsContainer>
-    <Heading>Why Choose Us?</Heading>
-    <Wrapper>
-      {StatsData.map((item, index) => (
-        <StatsBox key={index}>
-          <Icon>{item.icon}</Icon>
-          <Title>{item.title}</Title>
-          <p>{item.desc}</p>
-        </StatsBox>
-      ))}
-    </Wrapper>
-  </StatsContainer>
-);
+const Stats = () => {
+  const { t } = useTranslation();
+
+  return (
+    <StatsContainer>
+      <Heading>{t('stats.heading')}</Heading>
+      <Wrapper>
+        {StatsData.map((item, index) => (
+          <StatsBox key={index}>
+            <Icon>{item.icon}</Icon>
+            <Title>{t(item.titleKey)}</Title>
+            <p>{t(item.descKey)}</p>
+          </StatsBox>
+        ))}
+      </Wrapper>
+    </StatsContainer>
+  );
+};
 
 export default Stats;
 

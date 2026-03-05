@@ -2,54 +2,59 @@ import * as React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import Layout from '../components/layout';
 import Seo from '../components/seo';
 
-const ContactPage = () => (
-  <Layout>
-    <ContactWrapper>
-      <ContactHeader>
-        <Title>Contact Us</Title>
-        <Subtitle>We&apos;d love to hear from you. Get in touch with our team.</Subtitle>
-      </ContactHeader>
+const ContactPage = () => {
+  const { t } = useTranslation();
 
-      <ContactGrid>
-        <ContactCard>
-          <IconWrap>
-            <MdEmail size={32} />
-          </IconWrap>
-          <CardTitle>Email</CardTitle>
-          <CardText>Have a question? Send us an email.</CardText>
-          <ContactLink href="mailto:contact@explorix.com">contact@explorix.com</ContactLink>
-        </ContactCard>
+  return (
+    <Layout>
+      <ContactWrapper>
+        <ContactHeader>
+          <Title>{t('contact.title')}</Title>
+          <Subtitle>{t('contact.subtitle')}</Subtitle>
+        </ContactHeader>
 
-        <ContactCard>
-          <IconWrap>
-            <MdPhone size={32} />
-          </IconWrap>
-          <CardTitle>Phone</CardTitle>
-          <CardText>Mon–Fri, 9am–6pm (local time)</CardText>
-          <ContactLink href="tel:+5511999999999">+55 11 99999-9999</ContactLink>
-        </ContactCard>
+        <ContactGrid>
+          <ContactCard>
+            <IconWrap>
+              <MdEmail size={32} />
+            </IconWrap>
+            <CardTitle>{t('contact.emailTitle')}</CardTitle>
+            <CardText>{t('contact.emailText')}</CardText>
+            <ContactLink href="mailto:contact@explorix.com">contact@explorix.com</ContactLink>
+          </ContactCard>
 
-        <ContactCard>
-          <IconWrap>
-            <MdLocationOn size={32} />
-          </IconWrap>
-          <CardTitle>Office</CardTitle>
-          <CardText>Visit us or send mail.</CardText>
-          <Address>
-            Av. Paulista, 1000<br />
-            São Paulo, SP 01310-100<br />
-            Brazil
-          </Address>
-        </ContactCard>
-      </ContactGrid>
+          <ContactCard>
+            <IconWrap>
+              <MdPhone size={32} />
+            </IconWrap>
+            <CardTitle>{t('contact.phoneTitle')}</CardTitle>
+            <CardText>{t('contact.phoneText')}</CardText>
+            <ContactLink href="tel:+5511999999999">+55 11 99999-9999</ContactLink>
+          </ContactCard>
 
-      <BackLink to="/">← Back to home</BackLink>
-    </ContactWrapper>
-  </Layout>
-);
+          <ContactCard>
+            <IconWrap>
+              <MdLocationOn size={32} />
+            </IconWrap>
+            <CardTitle>{t('contact.officeTitle')}</CardTitle>
+            <CardText>{t('contact.officeText')}</CardText>
+            <Address>
+              Av. Paulista, 1000<br />
+              São Paulo, SP 01310-100<br />
+              Brazil
+            </Address>
+          </ContactCard>
+        </ContactGrid>
+
+        <BackLink to="/">{t('contact.backHome')}</BackLink>
+      </ContactWrapper>
+    </Layout>
+  );
+};
 
 export const Head = () => <Seo title="Contact" />;
 

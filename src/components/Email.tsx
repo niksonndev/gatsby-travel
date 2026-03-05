@@ -1,54 +1,58 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { Button } from './Button';
 import { StaticImage } from 'gatsby-plugin-image';
 
-const Email = () => (
-  <EmailContainer>
-    <StaticImage
-      style={{
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: 0,
-      }}
-      src="../assets/images/email2.jpg"
-      alt="email image"
-    />
-    <EmailContent>
-      <h1>Get Acess to Exlusive Offers</h1>
-      <p>Sign up for our news below to get $100 off your first trip!</p>
-      <form action="#">
-        <EmailFormWrap>
-          <label htmlFor="email">
-            <input type="email" placeholder="Enter your email" id="email" />
-          </label>
-          <Button
-            as="button"
-            type="submit"
-            round
-            primary
-            css={`
-              height: 48px;
+const Email = () => {
+  const { t } = useTranslation();
 
-              @media screen and (max-width: 768px) {
-                width: 100%;
-                min-width: 350px;
-              }
+  return (
+    <EmailContainer>
+      <StaticImage
+        style={{
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          zIndex: 0,
+        }}
+        src="../assets/images/email2.jpg"
+        alt="email image"
+      />
+      <EmailContent>
+        <h1>{t('email.title')}</h1>
+        <p>{t('email.description')}</p>
+        <form action="#">
+          <EmailFormWrap>
+            <label htmlFor="email">{t('email.placeholder')}</label>
+            <input type="email" placeholder={t('email.placeholder')} id="email" />
+            <Button
+              as="button"
+              type="submit"
+              round
+              primary
+              css={`
+                height: 48px;
 
-              @media screen and (max-width: 400px) {
-                width: 100%;
-                min-width: 250px;
-              }
-            `}
-          >
-            Sign Up
-          </Button>
-        </EmailFormWrap>
-      </form>
-    </EmailContent>
-  </EmailContainer>
-);
+                @media screen and (max-width: 768px) {
+                  width: 100%;
+                  min-width: 350px;
+                }
+
+                @media screen and (max-width: 400px) {
+                  width: 100%;
+                  min-width: 250px;
+                }
+              `}
+            >
+              {t('email.cta')}
+            </Button>
+          </EmailFormWrap>
+        </form>
+      </EmailContent>
+    </EmailContainer>
+  );
+};
 
 export default Email;
 

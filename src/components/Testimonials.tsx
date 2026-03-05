@@ -4,6 +4,7 @@ import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import { FaRegLightbulb } from 'react-icons/fa';
 import styled from 'styled-components';
 import { useStaticQuery, graphql } from 'gatsby';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
 interface TestimonialsQuery {
   allFile: {
@@ -35,11 +36,12 @@ const query = graphql`
 const Testimonials = () => {
   const data = useStaticQuery<TestimonialsQuery>(query);
   const testimonials = data.allFile.nodes;
+  const { t } = useTranslation();
 
   return (
     <TestimonialsContainer>
-      <TopLine>Testimonials</TopLine>
-      <Description>What People are Saying</Description>
+      <TopLine>{t('testimonials.title')}</TopLine>
+      <Description>{t('testimonials.subtitle')}</Description>
       <ContentWrapper>
         <ColumnOne>
           <Testimonial>

@@ -2,27 +2,50 @@ import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
+import { useTranslation, useI18next } from 'gatsby-plugin-react-i18next';
 import { menuData } from '../data/MenuData';
 import { Button } from './Button';
 
-const Header = ({ siteTitle }: { siteTitle: string }) => (
-  <Nav>
-    <NavLink to="/">EXPLORIX</NavLink>
-    <Bars />
-    <NavMenu>
-      {menuData.map((item, index) => (
-        <NavLink to={item.link} key={index}>
-          {item.title}
-        </NavLink>
-      ))}
-    </NavMenu>
-    <NavBtn>
-      <Button primary round to="/trips">
-        Book a Flight
-      </Button>
-    </NavBtn>
-  </Nav>
-);
+const Header = () => {
+  const { t } = useTranslation();
+  const { languages, language, changeLanguage } = useI18next();
+
+  const orderedLangs = ['pt', 'es', 'en'].filter((lng) => languages.includes(lng));
+
+  return (
+    <Nav>
+      <NavLink to="/">{t('nav.brand')}</NavLink>
+      <Bars />
+      <NavMenu>
+        {menuData.map((item, index) => (
+          <NavLink to={item.link} key={index}>
+            {t(`nav.${item.translationKey}`)}
+          </NavLink>
+        ))}
+      </NavMenu>
+      <RightSide>
+        <LangSwitcher>
+          {orderedLangs.map((lng) => (
+            <LangButton
+              key={lng}
+              type="button"
+              aria-label={`Switch language to ${lng}`}
+              $active={lng === language}
+              onClick={() => changeLanguage(lng)}
+            >
+              {lng.toUpperCase()}
+            </LangButton>
+          ))}
+        </LangSwitcher>
+        <NavBtn>
+          <Button primary round to="/trips">
+            {t('hero.cta')}
+          </Button>
+        </NavBtn>
+      </RightSide>
+    </Nav>
+  );
+};
 
 const Nav = styled.nav`
   background: transparent;
@@ -62,20 +85,44 @@ const Bars = styled(FaBars)`
 const NavMenu = styled.div`
   display: flex;
   align-items: center;
-  margin-right: -48px;
 
   @media screen and (max-width: 768px) {
     display: none;
   }
 `;
 
+const RightSide = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+`;
+
 const NavBtn = styled.div`
   display: flex;
   align-items: center;
-  margin-right: 24px;
 
   @media screen and (max-width: 768px) {
     display: none;
+  }
+`;
+
+const LangSwitcher = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+`;
+
+const LangButton = styled.button<{ $active: boolean }>`
+  border: none;
+  background: transparent;
+  color: ${({ $active }) => ($active ? '#f26a2e' : '#fff')};
+  font-size: 0.75rem;
+  cursor: pointer;
+  padding: 0.15rem 0.35rem;
+  border-radius: 4px;
+
+  &:hover {
+    color: #f26a2e;
   }
 `;
 

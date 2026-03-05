@@ -5,8 +5,8 @@ import { FaMoneyCheck } from 'react-icons/fa';
 
 export interface StatsDataItem {
   icon: React.ReactNode;
-  title: string;
-  desc: string;
+  titleKey: string;
+  descKey: string;
 }
 
 const GiEarthAmericaIcon = () => (
@@ -28,22 +28,22 @@ const FaMoneyCheckIcon = () => (
 export const StatsData: StatsDataItem[] = [
   {
     icon: <GiEarthAmericaIcon />,
-    title: 'Over 100 Destinations',
-    desc: 'Travel to over 100 unique places',
+    titleKey: 'stats.items.over100.title',
+    descKey: 'stats.items.over100.desc',
   },
   {
     icon: <MdAirplanemodeActiveIcon />,
-    title: '1 Million Trips Made',
-    desc: 'Over 1 million trips completed last year',
+    titleKey: 'stats.items.millionTrips.title',
+    descKey: 'stats.items.millionTrips.desc',
   },
   {
     icon: <MdTimerIcon />,
-    title: 'Fastest Support',
-    desc: 'Access our support team 24/7',
+    titleKey: 'stats.items.fastSupport.title',
+    descKey: 'stats.items.fastSupport.desc',
   },
   {
     icon: <FaMoneyCheckIcon />,
-    title: 'Best Deals',
-    desc: 'We offer the best prices',
+    titleKey: 'stats.items.bestDeals.title',
+    descKey: 'stats.items.bestDeals.desc',
   },
 ];
