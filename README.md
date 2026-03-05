@@ -1,42 +1,50 @@
-# Gatsby Travel Website
+# Gatsby Travel
 
-A modern travel website built with Gatsby, showcasing destinations, testimonials, and statistics. This project uses Gatsby's powerful static site generation capabilities to deliver a fast and optimized user experience.
+Modern travel website built with **Gatsby 5**, **React 19**, and **TypeScript**, showcasing destinations, testimonials, stats, and a contact page. The site is statically generated for performance and deployed with GitHub Actions.
 
-## ✨ Techs
-
-This project is made using:
+## ✨ Tech stack
 
 - [Gatsby](https://www.gatsbyjs.com/)
-- [React](https://reactjs.org/)
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://styled-components.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [GitHub Actions](https://github.com/features/actions)
+- [pnpm](https://pnpm.io/)
 
 ## 🚀 Features
 
-- **Reusable Components**: Modular components like `Hero`, `Footer`, `Testimonials`, and `Trips`.
-- **Responsive Design**: Fully responsive layout for all devices.
-- **SEO Optimized**: Built-in SEO component for better search engine visibility.
-- **Automated Deployment**: Continuous deployment to GitHub Pages using GitHub Actions.
+- **Travel landing page**: Hero section, trips grid with images, testimonials, stats and email capture.
+- **Contact page**: `/contact` with email, phone and office info.
+- **Responsive layout**: Optimized for desktop, tablet and mobile.
+- **SEO component**: Reusable `Seo` component using Gatsby `useStaticQuery`.
+- **GitHub Pages deploy**: CI pipeline via GitHub Actions.
 
-## 🚀 How to run
+## 🧩 Project scripts
+
+From the project root:
+
+- `pnpm develop` – start Gatsby dev server on `http://localhost:8000`
+- `pnpm build` – production build
+- `pnpm serve` – serve the production build locally
+- `pnpm clean` – clear Gatsby cache
+- `pnpm format` – run Prettier on the codebase
+
+## 🛠 How to run locally
 
 ```bash
-- Clone the repository
-- Install packages with `yarn` or `npm install`
-- Run `yarn start` or `npm run start`
+git clone <repo-url>
+cd gatsby-travel
+pnpm install
+pnpm develop
 ```
 
-Now you can access [`localhost:8000`](http://localhost:8000)
+Then open [`http://localhost:8000`](http://localhost:8000) in your browser.
 
-## 🤝 Contributing
+## 👤 Author
 
-Feel free to contribute! If you have ideas for new workflows, improvements, or fixes, please open an issue or submit a pull request.
+**niksonndev**
 
-## Author
-
-👤 **Nikson Rotondaro**
-
-- Website: https://github.com/NRotondaro
-- Github: [@NRotondaro](https://github.com/NRotondaro)
-- LinkedIn: [https:\/\/www.linkedin.com\/in\/nikson-rotondaro\/](https://www.linkedin.com/in/nikson-rotondaro/)
+- Email: <niksonndev@gmail.com>
+- GitHub: [@NRotondaro](https://github.com/NRotondaro)
+- LinkedIn: [nikson-rotondaro](https://www.linkedin.com/in/nikson-rotondaro/)

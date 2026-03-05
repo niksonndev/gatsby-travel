@@ -11,7 +11,7 @@ const Footer = () => (
       </FooterDesc>
       <FooterLinkItems>
         <FooterLinkTitle>Contact Us</FooterLinkTitle>
-        <FooterLink to="/about">Contact</FooterLink>
+        <FooterLink to="/contact">Contact</FooterLink>
         <FooterLink to="/">Support</FooterLink>
         <FooterLink to="/">Destinations</FooterLink>
         <FooterLink to="/">Sponsorships</FooterLink>

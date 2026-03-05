@@ -6,24 +6,31 @@ on:
       - main
     paths-ignore:
       - 'README.md'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write  # mínimo para o actions-gh-pages
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    concurrency:
+      group: deploy-gatsby-travel
+      cancel-in-progress: true
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
+          cache: pnpm
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -34,6 +41,6 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: public
           commit_message: 'Deploy 🚀'
