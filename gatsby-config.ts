@@ -1,6 +1,7 @@
 import type { GatsbyConfig } from 'gatsby';
 
 const config: GatsbyConfig = {
+  pathPrefix: '/gatsby-travel',
   siteMetadata: {
     title: `Gatsby Travel`,
     description: `Travel website showcasing the best travel destinations and deals online.`,

@@ -46,5 +46,5 @@ Then open [`http://localhost:8000`](http://localhost:8000) in your browser.
 **niksonndev**
 
 - Email: <niksonndev@gmail.com>
-- GitHub: [@NRotondaro](https://github.com/NRotondaro)
+- GitHub: [@niksonndev](https://github.com/niksonndev)
 - LinkedIn: [nikson-rotondaro](https://www.linkedin.com/in/nikson-rotondaro/)
