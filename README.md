@@ -1,6 +1,6 @@
 # Gatsby Travel
 
-Modern travel website built with **Gatsby 5**, **React 19**, and **TypeScript**, showcasing destinations, testimonials, stats, and a contact page. The site is statically generated for performance and deployed with GitHub Actions.
+Modern travel website built with **Gatsby 5**, **React 19**, and **TypeScript**: destinations, testimonials, stats, newsletter signup, and contact page. Accessible (WCAG 2.2 AA), multilingual (PT, EN, ES), and deployed via GitHub Actions.
 
 ## ✨ Tech stack
 
@@ -9,26 +9,34 @@ Modern travel website built with **Gatsby 5**, **React 19**, and **TypeScript**,
 - [TypeScript](https://www.typescriptlang.org/)
 - [Styled Components](https://styled-components.com/)
 - [React Icons](https://react-icons.github.io/react-icons/)
+- [gatsby-plugin-react-i18next](https://github.com/microapps/gatsby-plugin-react-i18next) (i18n)
 - [GitHub Actions](https://github.com/features/actions)
 - [pnpm](https://pnpm.io/)
 
 ## 🚀 Features
 
-- **Travel landing page**: Hero section, trips grid with images, testimonials, stats and email capture.
-- **Contact page**: `/contact` with email, phone and office info.
-- **Responsive layout**: Optimized for desktop, tablet and mobile.
-- **SEO component**: Reusable `Seo` component using Gatsby `useStaticQuery`.
-- **GitHub Pages deploy**: CI pipeline via GitHub Actions.
+- **Travel landing page**: Hero with video, trips grid, testimonials, stats, and email capture form.
+- **Contact page**: `/contact` with email, phone, and office info.
+- **Responsive layout**: Desktop, tablet, and mobile; functional hamburger menu on mobile (keyboard and Escape to close).
+- **Accessibility (WCAG 2.2 AA)**:
+  - Skip link “Skip to main content” and visible focus on links/buttons.
+  - Logical heading hierarchy (h1 → h2 → h3), form labels, `aria-describedby`/`aria-invalid` for errors.
+  - Live regions (aria-live) for language change and newsletter result (success/error).
+  - Visible error and success messages announced by screen readers; focus returns to the field on validation error.
+- **Internationalization (i18n)**: Portuguese, English, and Spanish with language switcher in the header.
+- **SEO**: Reusable `Seo` component using Gatsby `useStaticQuery`.
+- **Deploy**: GitHub Pages via GitHub Actions.
 
 ## 🧩 Project scripts
 
 From the project root:
 
-- `pnpm develop` – start Gatsby dev server on `http://localhost:8000`
-- `pnpm build` – production build
+- `pnpm develop` – start Gatsby dev server at `http://localhost:8000`
+- `pnpm build` – production build (with `--prefix-paths` for GitHub Pages)
 - `pnpm serve` – serve the production build locally
 - `pnpm clean` – clear Gatsby cache
 - `pnpm format` – run Prettier on the codebase
+- `pnpm lint` – run ESLint on `src/**/*.{ts,tsx}`
 
 ## 🛠 How to run locally
 
@@ -36,10 +44,10 @@ From the project root:
 git clone <repo-url>
 cd gatsby-travel
 pnpm install
-pnpm develop
+pnpm dev
 ```
 
-Then open [`http://localhost:8000`](http://localhost:8000) in your browser.
+Then open [http://localhost:8000](http://localhost:8000) in your browser.
 
 ## 👤 Author
 
