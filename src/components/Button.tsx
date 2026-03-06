@@ -7,7 +7,6 @@ export const Button = styled(Link)<{ primary?: boolean; big?: boolean; round?: b
   padding: ${({ big }) => (big ? '16px 40px' : '10px 32px')};
   color: #fff;
   font-size: ${({ big }) => (big ? '20px' : '16px')};
-  outline: none;
   border: none;
   min-width: 100px;
   cursor: pointer;
@@ -18,5 +17,11 @@ export const Button = styled(Link)<{ primary?: boolean; big?: boolean; round?: b
   &:hover {
     background: ${({ primary }) => (primary ? '#077BF1' : '#F26A2E')};
     transform: translateY(-2px);
+  }
+
+  /* Focus visible herdado do GlobalStyle; reforço para contraste */
+  &:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
   }
 `;

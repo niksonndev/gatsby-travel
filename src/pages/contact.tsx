@@ -20,7 +20,7 @@ const ContactPage = () => {
         <ContactGrid>
           <ContactCard>
             <IconWrap>
-              <MdEmail size={32} />
+              <MdEmail size={32} aria-hidden="true" />
             </IconWrap>
             <CardTitle>{t('contact.emailTitle')}</CardTitle>
             <CardText>{t('contact.emailText')}</CardText>
@@ -29,7 +29,7 @@ const ContactPage = () => {
 
           <ContactCard>
             <IconWrap>
-              <MdPhone size={32} />
+              <MdPhone size={32} aria-hidden="true" />
             </IconWrap>
             <CardTitle>{t('contact.phoneTitle')}</CardTitle>
             <CardText>{t('contact.phoneText')}</CardText>
@@ -38,7 +38,7 @@ const ContactPage = () => {
 
           <ContactCard>
             <IconWrap>
-              <MdLocationOn size={32} />
+              <MdLocationOn size={32} aria-hidden="true" />
             </IconWrap>
             <CardTitle>{t('contact.officeTitle')}</CardTitle>
             <CardText>{t('contact.officeText')}</CardText>
@@ -144,6 +144,11 @@ const ContactLink = styled.a`
   &:hover {
     text-decoration: underline;
   }
+
+  &:focus-visible {
+    outline: 2px solid #077bf1;
+    outline-offset: 2px;
+  }
 `;
 
 const Address = styled.p`
@@ -161,5 +166,10 @@ const BackLink = styled(Link)`
 
   &:hover {
     text-decoration: underline;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #077bf1;
+    outline-offset: 2px;
   }
 `;

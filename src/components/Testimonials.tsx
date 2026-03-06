@@ -40,12 +40,13 @@ const Testimonials = () => {
 
   return (
     <TestimonialsContainer>
-      <TopLine>{t('testimonials.title')}</TopLine>
-      <Description>{t('testimonials.subtitle')}</Description>
+      <SectionTitle as="h2">{t('testimonials.title')}</SectionTitle>
+      <Description as="p">{t('testimonials.subtitle')}</Description>
       <ContentWrapper>
         <ColumnOne>
           <Testimonial>
             <IoMdCheckmarkCircleOutline
+              aria-hidden="true"
               css={`
                 color: #3fffa8;
                 font-size: 2rem;
@@ -61,6 +62,7 @@ const Testimonials = () => {
           </Testimonial>
           <Testimonial>
             <FaRegLightbulb
+              aria-hidden="true"
               css={`
                 color: #f9b19b;
                 font-size: 2rem;
@@ -96,11 +98,12 @@ const TestimonialsContainer = styled.div`
   height: 100%;
 `;
 
-const TopLine = styled.p`
+const SectionTitle = styled.h2`
   color: #077bf1;
   font-size: 1rem;
   padding-left: 2rem;
   margin-bottom: 0.75rem;
+  font-weight: bold;
 `;
 
 const Description = styled.p`

@@ -45,17 +45,17 @@ const Trips = ({ heading }: { heading: string }) => {
 
   return (
     <ProductsContainer>
-      <ProductsHeading>{heading}</ProductsHeading>
+      <ProductsHeading as="h2">{heading}</ProductsHeading>
       <ProductsWrapper>
         {trips.map((trip, index) => {
           const { alt, button, name, img } = trip;
           const pathToImage = getImage(img as { childImageSharp: { gatsbyImageData: IGatsbyImageData } });
           return (
             <ProductCard key={index}>
-              <ProductImg image={pathToImage!} alt={alt} />
+              <ProductImg image={pathToImage!} alt={alt || name} />
               <ProductInfo>
                 <TextWrap>
-                  <ImLocation />
+                  <ImLocation aria-hidden="true" />
                   <ProductTitle>{name}</ProductTitle>
                 </TextWrap>
                 <Button
@@ -87,11 +87,12 @@ const ProductsContainer = styled.div`
   color: #fff;
 `;
 
-const ProductsHeading = styled.div`
+const ProductsHeading = styled.h2`
   font-size: clamp(1.2rem, 5vw, 3rem);
   text-align: center;
   margin-bottom: 5rem;
   color: #000;
+  font-weight: bold;
 `;
 
 const ProductsWrapper = styled.div`

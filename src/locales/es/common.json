@@ -64,6 +64,23 @@
     "title": "Hola desde la segunda página",
     "description": "Bienvenido a la página 2",
     "backHome": "Volver a la página principal"
+  },
+  "a11y": {
+    "skipToContent": "Saltar al contenido principal",
+    "languageChanged": "Idioma cambiado a {{lng}}",
+    "langPt": "Portugués",
+    "langEn": "Inglés",
+    "langEs": "Español",
+    "openMenu": "Abrir menú de navegación",
+    "newsletterSuccess": "Suscripción realizada con éxito.",
+    "newsletterError": "Error al suscribirse. Inténtalo de nuevo.",
+    "footer": {
+      "contactUs": "Contáctanos",
+      "videos": "Vídeos",
+      "socialMedia": "Redes sociales",
+      "explorix": "Explorix",
+      "tagline": "Nos esforzamos por crear las mejores experiencias para nuestros clientes"
+    }
   }
 }
 

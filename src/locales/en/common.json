@@ -64,6 +64,23 @@
     "title": "Hi from the second page",
     "description": "Welcome to page 2",
     "backHome": "Go back to the homepage"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "languageChanged": "Language changed to {{lng}}",
+    "langPt": "Portuguese",
+    "langEn": "English",
+    "langEs": "Spanish",
+    "openMenu": "Open navigation menu",
+    "newsletterSuccess": "Successfully subscribed.",
+    "newsletterError": "Subscription failed. Please try again.",
+    "footer": {
+      "contactUs": "Contact Us",
+      "videos": "Videos",
+      "socialMedia": "Social Media",
+      "explorix": "Explorix",
+      "tagline": "We strive to create the best experiences for our customers"
+    }
   }
 }
 

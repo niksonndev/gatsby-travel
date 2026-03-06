@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery } from 'gatsby';
 import React from 'react';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import Footer from './Footer';
 import Header from './header';
 import { GlobalStyle } from './styles/GlobalStyles';
@@ -13,6 +14,7 @@ interface SiteTitleQuery {
 }
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { t } = useTranslation();
   const data = useStaticQuery<SiteTitleQuery>(graphql`
     query SiteTitleQuery {
       site {
@@ -26,8 +28,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <GlobalStyle />
-      <Header siteTitle={data.site.siteMetadata?.title ?? `Title`} />
-      <main>{children}</main>
+      <a href="#main-content" className="sr-only sr-only-focusable">
+        {t('a11y.skipToContent')}
+      </a>
+      <Header />
+      <main id="main-content" tabIndex={-1}>
+        {children}
+      </main>
       <Footer />
     </>
   );

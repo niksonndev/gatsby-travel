@@ -32,7 +32,7 @@ const StatsContainer = styled.div`
   padding: 0 32px;
 `;
 
-const Heading = styled.h1`
+const Heading = styled.h2`
   text-align: start;
   font-size: clamp(1.5rem, 5vw, 2rem);
   margin-bottom: 3rem;

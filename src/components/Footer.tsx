@@ -1,40 +1,44 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 
-const Footer = () => (
-  <FooterContainer>
-    <FooterLinksWrapper>
-      <FooterDesc>
-        <h1>Explorix</h1>
-        <p>We strive to create the best experiences for our customers</p>
-      </FooterDesc>
-      <FooterLinkItems>
-        <FooterLinkTitle>Contact Us</FooterLinkTitle>
-        <FooterLink to="/contact">Contact</FooterLink>
-        <FooterLink to="/">Support</FooterLink>
-        <FooterLink to="/">Destinations</FooterLink>
-        <FooterLink to="/">Sponsorships</FooterLink>
-      </FooterLinkItems>
-    </FooterLinksWrapper>
-    <FooterLinksWrapper>
-      <FooterLinkItems>
-        <FooterLinkTitle>Videos</FooterLinkTitle>
-        <FooterLink to="/about">Submit Video</FooterLink>
-        <FooterLink to="/">Ambassadors</FooterLink>
-        <FooterLink to="/">Agency</FooterLink>
-        <FooterLink to="/">Influencer</FooterLink>
-      </FooterLinkItems>
-      <FooterLinkItems>
-        <FooterLinkTitle>Social Media</FooterLinkTitle>
-        <FooterLink to="/about">Instagram</FooterLink>
-        <FooterLink to="/">Facebook</FooterLink>
-        <FooterLink to="/">YouTube</FooterLink>
-        <FooterLink to="/">Twitter</FooterLink>
-      </FooterLinkItems>
-    </FooterLinksWrapper>
-  </FooterContainer>
-);
+const Footer = () => {
+  const { t } = useTranslation();
+  return (
+    <FooterContainer>
+      <FooterLinksWrapper>
+        <FooterDesc>
+          <h2>{t('a11y.footer.explorix')}</h2>
+          <p>{t('a11y.footer.tagline')}</p>
+        </FooterDesc>
+        <FooterLinkItems>
+          <FooterLinkTitle as="h3">{t('a11y.footer.contactUs')}</FooterLinkTitle>
+          <FooterLink to="/contact">{t('nav.contact')}</FooterLink>
+          <FooterLink to="/">Support</FooterLink>
+          <FooterLink to="/">Destinations</FooterLink>
+          <FooterLink to="/">Sponsorships</FooterLink>
+        </FooterLinkItems>
+      </FooterLinksWrapper>
+      <FooterLinksWrapper>
+        <FooterLinkItems>
+          <FooterLinkTitle as="h3">{t('a11y.footer.videos')}</FooterLinkTitle>
+          <FooterLink to="/about">Submit Video</FooterLink>
+          <FooterLink to="/">Ambassadors</FooterLink>
+          <FooterLink to="/">Agency</FooterLink>
+          <FooterLink to="/">Influencer</FooterLink>
+        </FooterLinkItems>
+        <FooterLinkItems>
+          <FooterLinkTitle as="h3">{t('a11y.footer.socialMedia')}</FooterLinkTitle>
+          <FooterLink to="/about">Instagram</FooterLink>
+          <FooterLink to="/">Facebook</FooterLink>
+          <FooterLink to="/">YouTube</FooterLink>
+          <FooterLink to="/">Twitter</FooterLink>
+        </FooterLinkItems>
+      </FooterLinksWrapper>
+    </FooterContainer>
+  );
+};
 
 export default Footer;
 
@@ -49,9 +53,11 @@ const FooterContainer = styled.div`
 const FooterDesc = styled.div`
   padding: 0 2rem;
 
-  h1 {
+  h2 {
     margin-bottom: 3rem;
     color: #f26a2e;
+    font-size: inherit;
+    font-weight: bold;
   }
 
   @media screen and (max-width: 400px) {
@@ -82,6 +88,7 @@ const FooterLinkItems = styled.div`
 const FooterLinkTitle = styled.h2`
   font-size: 14px;
   margin-bottom: 16px;
+  font-weight: bold;
 `;
 
 const FooterLink = styled(Link)`

@@ -5,17 +5,29 @@ import { FaBars } from 'react-icons/fa';
 import { useTranslation, useI18next } from 'gatsby-plugin-react-i18next';
 import { menuData } from '../data/MenuData';
 import { Button } from './Button';
+import LiveRegion from './LiveRegion';
+
+const langNames: Record<string, string> = { pt: 'langPt', es: 'langEs', en: 'langEn' };
 
 const Header = () => {
   const { t } = useTranslation();
   const { languages, language, changeLanguage } = useI18next();
+  const [liveMessage, setLiveMessage] = React.useState('');
 
   const orderedLangs = ['pt', 'es', 'en'].filter((lng) => languages.includes(lng));
 
+  const handleLanguageChange = (lng: string) => {
+    changeLanguage(lng);
+    const langLabel = t(`a11y.${langNames[lng]}`);
+    setLiveMessage(t('a11y.languageChanged', { lng: langLabel }));
+  };
+
   return (
-    <Nav>
+    <Nav aria-label="Main navigation">
       <NavLink to="/">{t('nav.brand')}</NavLink>
-      <Bars />
+      <MenuButton type="button" aria-label={t('a11y.openMenu')} aria-expanded={false}>
+        <Bars aria-hidden="true" />
+      </MenuButton>
       <NavMenu>
         {menuData.map((item, index) => (
           <NavLink to={item.link} key={index}>
@@ -24,19 +36,21 @@ const Header = () => {
         ))}
       </NavMenu>
       <RightSide>
-        <LangSwitcher>
+        <LangSwitcher role="group" aria-label="Language selector">
           {orderedLangs.map((lng) => (
             <LangButton
               key={lng}
               type="button"
-              aria-label={`Switch language to ${lng}`}
+              aria-label={t('a11y.languageChanged', { lng: t(`a11y.${langNames[lng]}`) })}
+              aria-pressed={lng === language}
               $active={lng === language}
-              onClick={() => changeLanguage(lng)}
+              onClick={() => handleLanguageChange(lng)}
             >
               {lng.toUpperCase()}
             </LangButton>
           ))}
         </LangSwitcher>
+        <LiveRegion message={liveMessage} politeness="polite" />
         <NavBtn>
           <Button primary round to="/trips">
             {t('hero.cta')}
@@ -70,15 +84,30 @@ const NavLink = styled(Link)`
 const Bars = styled(FaBars)`
   display: none;
   color: #fff;
+  pointer-events: none;
 
   @media screen and (max-width: 768px) {
     display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 75%);
     font-size: 1.8rem;
-    cursor: pointer;
+  }
+`;
+
+const MenuButton = styled.button`
+  display: none;
+  background: transparent;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-100%, 75%);
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
