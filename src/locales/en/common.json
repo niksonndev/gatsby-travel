@@ -72,6 +72,10 @@
     "langEn": "English",
     "langEs": "Spanish",
     "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
+    "selectLangPt": "Select Portuguese",
+    "selectLangEn": "Select English",
+    "selectLangEs": "Select Spanish",
     "newsletterSuccess": "Successfully subscribed.",
     "newsletterError": "Subscription failed. Please try again.",
     "footer": {

@@ -8,13 +8,35 @@ import { Button } from './Button';
 import LiveRegion from './LiveRegion';
 
 const langNames: Record<string, string> = { pt: 'langPt', es: 'langEs', en: 'langEn' };
+const langSelectKeys: Record<string, string> = {
+  pt: 'selectLangPt',
+  es: 'selectLangEs',
+  en: 'selectLangEn',
+};
 
 const Header = () => {
   const { t } = useTranslation();
   const { languages, language, changeLanguage } = useI18next();
   const [liveMessage, setLiveMessage] = React.useState('');
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const navMenuRef = React.useRef<HTMLDivElement>(null);
 
   const orderedLangs = ['pt', 'es', 'en'].filter((lng) => languages.includes(lng));
+
+  React.useEffect(() => {
+    if (menuOpen) {
+      const firstLink = navMenuRef.current?.querySelector<HTMLAnchorElement>('a');
+      firstLink?.focus();
+    }
+  }, [menuOpen]);
+
+  React.useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
 
   const handleLanguageChange = (lng: string) => {
     changeLanguage(lng);
@@ -22,37 +44,45 @@ const Header = () => {
     setLiveMessage(t('a11y.languageChanged', { lng: langLabel }));
   };
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <Nav aria-label="Main navigation">
-      <NavLink to="/">{t('nav.brand')}</NavLink>
-      <MenuButton type="button" aria-label={t('a11y.openMenu')} aria-expanded={false}>
-        <Bars aria-hidden="true" />
+    <Nav aria-label='Main navigation'>
+      <NavLink to='/' onClick={closeMenu}>
+        {t('nav.brand')}
+      </NavLink>
+      <MenuButton
+        type='button'
+        aria-label={menuOpen ? t('a11y.closeMenu') : t('a11y.openMenu')}
+        aria-expanded={menuOpen}
+        aria-controls='nav-menu'
+        onClick={() => setMenuOpen((prev) => !prev)}>
+        <Bars aria-hidden='true' />
       </MenuButton>
-      <NavMenu>
+      <NavMenu id='nav-menu' ref={navMenuRef} $isOpen={menuOpen} role='menu'>
         {menuData.map((item, index) => (
-          <NavLink to={item.link} key={index}>
+          <NavLink to={item.link} key={index} role='menuitem' onClick={closeMenu}>
             {t(`nav.${item.translationKey}`)}
           </NavLink>
         ))}
       </NavMenu>
       <RightSide>
-        <LangSwitcher role="group" aria-label="Language selector">
+        <LangSwitcher role='group' aria-label='Language selector'>
           {orderedLangs.map((lng) => (
             <LangButton
               key={lng}
-              type="button"
-              aria-label={t('a11y.languageChanged', { lng: t(`a11y.${langNames[lng]}`) })}
+              type='button'
+              aria-label={t(`a11y.${langSelectKeys[lng]}`)}
               aria-pressed={lng === language}
               $active={lng === language}
-              onClick={() => handleLanguageChange(lng)}
-            >
+              onClick={() => handleLanguageChange(lng)}>
               {lng.toUpperCase()}
             </LangButton>
           ))}
         </LangSwitcher>
-        <LiveRegion message={liveMessage} politeness="polite" />
+        <LiveRegion message={liveMessage} politeness='polite' />
         <NavBtn>
-          <Button primary round to="/trips">
+          <Button primary round to='/trips'>
             {t('hero.cta')}
           </Button>
         </NavBtn>
@@ -111,12 +141,21 @@ const MenuButton = styled.button`
   }
 `;
 
-const NavMenu = styled.div`
+const NavMenu = styled.div<{ $isOpen: boolean }>`
   display: flex;
   align-items: center;
 
   @media screen and (max-width: 768px) {
-    display: none;
+    display: ${({ $isOpen }) => ($isOpen ? 'flex' : 'none')};
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 1rem;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 `;
 

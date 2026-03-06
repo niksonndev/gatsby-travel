@@ -11,6 +11,13 @@ const Email = () => {
   const [errorMessage, setErrorMessage] = React.useState('');
   const errorId = 'email-error';
   const inputId = 'email';
+  const inputRef = React.useRef<HTMLInputElement>(null);
+
+  React.useEffect(() => {
+    if (status === 'error') {
+      inputRef.current?.focus();
+    }
+  }, [status]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,6 +52,7 @@ const Email = () => {
           <EmailFormWrap>
             <label htmlFor={inputId}>{t('email.placeholder')}</label>
             <input
+              ref={inputRef}
               type="email"
               id={inputId}
               name="email"
@@ -54,15 +62,15 @@ const Email = () => {
               autoComplete="email"
             />
             {status === 'error' && (
-              <span id={errorId} className="sr-only" role="alert">
+              <ErrorMessage id={errorId} role="alert">
                 {errorMessage}
-              </span>
+              </ErrorMessage>
             )}
-            {status !== 'idle' && (
-              <LiveRegion
-                message={status === 'success' ? t('a11y.newsletterSuccess') : errorMessage}
-                politeness={status === 'error' ? 'assertive' : 'polite'}
-              />
+            {status === 'success' && (
+              <>
+                <SuccessMessage>{t('a11y.newsletterSuccess')}</SuccessMessage>
+                <LiveRegion message={t('a11y.newsletterSuccess')} politeness="polite" />
+              </>
             )}
             <SubmitButton as="button" type="submit" round primary>
               {t('email.cta')}
@@ -154,4 +162,24 @@ const SubmitButton = styled(Button)`
     width: 100%;
     min-width: 250px;
   }
+`;
+
+const ErrorMessage = styled.div`
+  color: #ff6b6b;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  max-width: 350px;
+  text-align: start;
+
+  @media screen and (max-width: 768px) {
+    max-width: 100%;
+  }
+`;
+
+const SuccessMessage = styled.p`
+  color: #3fffa8;
+  font-size: 0.9375rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
 `;
