@@ -9,14 +9,14 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: write  # mínimo para o actions-gh-pages
+  contents: write
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: deploy-gatsby-travel
+      group: deploy-vite
       cancel-in-progress: true
 
     steps:
@@ -34,12 +34,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build Gatsby site
+      - name: Build Vite site
         run: pnpm run build
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: public
+          publish_dir: dist
           commit_message: 'Deploy 🚀'
