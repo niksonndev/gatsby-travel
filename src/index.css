@@ -11,6 +11,7 @@
   --color-surface: #0d1b3e;
   --color-foreground: #e8f4fd;
   --color-accent: #1e5fa8;
+  --color-danger: #e87070;
 }
 
 @layer base {
@@ -25,6 +26,12 @@
   }
   .bar-fill {
     @apply h-1.5 rounded-[3px] transition-[width] duration-400 ease-in-out;
+  }
+  .prazo-btn {
+    @apply bg-white/4 border border-white/10 text-[#a0b4cc] rounded-lg px-3.5 py-2 cursor-pointer font-[inherit] text-[13px] transition-all duration-150;
+  }
+  .prazo-btn.active {
+    @apply bg-accent border-accent text-white;
   }
 }
 

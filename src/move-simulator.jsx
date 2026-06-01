@@ -120,22 +120,6 @@ export default function App() {
           border-color: #ffb432;
           background: rgba(255,180,50,0.08);
         }
-        .prazo-btn {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: #a0b4cc;
-          border-radius: 8px;
-          padding: 8px 14px;
-          cursor: pointer;
-          font-family: inherit;
-          font-size: 13px;
-          transition: all 0.15s;
-        }
-        .prazo-btn.active {
-          background: #1e5fa8;
-          border-color: #1e5fa8;
-          color: #fff;
-        }
         .custom-input {
           background: rgba(255,255,255,0.05);
           border: 1px solid rgba(255,180,50,0.3);
@@ -306,7 +290,7 @@ export default function App() {
                   <div className='text-xs text-subtle'>entrada</div>
                   <div className='text-sm font-medium'>{fmt(row.entrada)}</div>
                 </div>
-                <div style={{ textAlign: 'right' }}>
+                <div className='text-right'>
                   <div className='text-xs text-subtle'>parcela/{prazo}x</div>
                   <div className='text-sm font-medium text-foreground'>
                     {fmt(row.parcela)}
@@ -355,31 +339,23 @@ export default function App() {
             <div className='mb-4'>
               <div className='flex justify-between text-xs text-subtle mb-1.5'>
                 <span>Custo do crédito (juros)</span>
-                <span style={{ color: '#e87070' }}>
+                <span className='text-danger'>
                   {fmt(selectedRow.jurosTotal)}
                 </span>
               </div>
-              <div
-                style={{
-                  background: 'rgba(255,255,255,0.06)',
-                  borderRadius: 3,
-                  height: 6,
-                }}
-              >
+              <div className='bg-white/6 rounded-[3px] h-1.5'>
                 <div
                   className='bar-fill'
                   style={{
-                    width: `${Math.min((selectedRow.jurosTotal / selectedRow.financiado) * 100, 100)}%`,
-                    background: 'linear-gradient(90deg, #1e5fa8, #e87070)',
+                    width: `${Math.min((selectedRow.jurosTotal / valorVeiculo) * 100, 100)}%`,
+                    background:
+                      'linear-gradient(90deg, var(--color-accent), var(--color-danger))',
                   }}
                 />
               </div>
               <div className='text-xs text-subtle/90 mt-1'>
-                {(
-                  (selectedRow.jurosTotal / selectedRow.financiado) *
-                  100
-                ).toFixed(1)}
-                % sobre o valor financiado
+                {((selectedRow.jurosTotal / valorVeiculo) * 100).toFixed(1)}%
+                sobre o valor financiado
               </div>
             </div>
 
@@ -388,19 +364,11 @@ export default function App() {
                 <span className='text-primary'>
                   ▪ Entrada {selectedRow.pct}%
                 </span>
-                <span style={{ color: '#a0b4cc' }}>
+                <span className='text-[#a0b4cc]'>
                   ▪ Financiado {(100 - parseFloat(selectedRow.pct)).toFixed(0)}%
                 </span>
               </div>
-              <div
-                style={{
-                  background: 'rgba(255,255,255,0.06)',
-                  borderRadius: 3,
-                  height: 8,
-                  display: 'flex',
-                  overflow: 'hidden',
-                }}
-              >
+              <div className='bg-white/6 rounded-[3px] h-2 flex overflow-hidden'>
                 <div
                   className='bar-fill bg-accent'
                   style={{
@@ -408,11 +376,8 @@ export default function App() {
                   }}
                 />
                 <div
-                  className='bar-fill'
-                  style={{
-                    width: `${100 - parseFloat(selectedRow.pct)}%`,
-                    background: 'rgba(255,255,255,0.12)',
-                  }}
+                  className='bar-fill bg-white/12'
+                  style={{ width: `${100 - parseFloat(selectedRow.pct)}%` }}
                 />
               </div>
             </div>
