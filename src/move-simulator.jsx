@@ -88,7 +88,7 @@ export default function App() {
   const sliderPct = ((valorVeiculo - 10000) / (150000 - 10000)) * 100;
 
   return (
-    <div className='min-h-screen overflow-x-hidden'>
+    <main className='min-h-screen overflow-x-hidden'>
       <style>{`
         .row-card {
           background: rgba(255,255,255,0.03);
@@ -211,7 +211,7 @@ export default function App() {
       <div className='px-4 py-4.5 max-w-130 mx-auto'>
         {/* === VALOR DO VEÍCULO === */}
         <div className='mb-5.5 bg-primary/5 border border-primary/15 rounded-[14px] px-4.5 py-4'>
-          <div className='text-xs text-subtle/70 tracking-[2px] uppercase mb-3.5'>
+          <div className='text-xs text-subtle tracking-[2px] uppercase mb-3.5'>
             Valor do veículo
           </div>
           <div className='flex flex-col gap-2 mb-3 sm:flex-row sm:items-center sm:justify-between'>
@@ -223,6 +223,7 @@ export default function App() {
               value={inputVeiculo}
               onChange={(e) => handleValorVeiculoInput(e.target.value)}
               placeholder='Ex: 80000'
+              aria-label='Valor do veículo'
             />
           </div>
           <div className='relative py-2 pb-1'>
@@ -232,10 +233,11 @@ export default function App() {
               max='150000'
               step='5000'
               value={valorVeiculo}
+              aria-label='Valor do veículo'
               onChange={(e) => handleValorVeiculoSlider(e.target.value)}
             />
           </div>
-          <div className='flex justify-between text-xs text-subtle/50 mt-0.5'>
+          <div className='flex justify-between text-xs text-subtle/90 mt-0.5'>
             <span>R$ 10k</span>
             <span>R$ 150k (teto)</span>
           </div>
@@ -261,6 +263,7 @@ export default function App() {
         <div style={{ marginBottom: 20 }}>
           <div>Simular outra entrada</div>
           <input
+            aria-label='Valor de entrada personalizado'
             className='custom-input'
             placeholder={`Ex: ${Math.round(valorVeiculo * 0.15).toLocaleString('pt-BR')}`}
             value={customEntrada}
@@ -378,7 +381,7 @@ export default function App() {
                   }}
                 />
               </div>
-              <div className='text-xs text-subtle/70 mt-1'>
+              <div className='text-xs text-subtle/90 mt-1'>
                 {(
                   (selectedRow.jurosTotal / selectedRow.financiado) *
                   100
@@ -423,12 +426,12 @@ export default function App() {
           </div>
         )}
 
-        <div className='mt-4 px-3.5 py-3 bg-warning/4 border border-warning/12 rounded-xs text-xs text-[#7a6030] leading-[1.7]'>
+        <div className='mt-4 px-3.5 py-3 bg-warning/10 border border-warning/20 rounded-xs text-xs text-warning leading-[1.7]'>
           ⚠ Taxa teto de 12,25% a.a. = 2,5% (governo) + 8,5% (banco) + 1,25%
           (BNDES). Taxa real depende da instituição. Máximo elegível: R$
           150.000. Disponível a partir de 19/06/2026.
         </div>
       </div>
-    </div>
+    </main>
   );
 }
