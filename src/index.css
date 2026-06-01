@@ -10,15 +10,46 @@
   --color-warning: #ffb432;
   --color-base: #0a0f1e;
   --color-surface: #0d1b3e;
+  --color-foreground: #e8f4fd;
+  --color-accent: #1e5fa8;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-foreground bg-base;
+  }
+}
+
+@layer components {
+  .stat-block {
+    @apply bg-white/4 rounded-[10px] p-3.5 text-center;
+  }
+  .bar-fill {
+    @apply h-1.5 rounded-[3px] transition-[width] duration-400 ease-in-out;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility fade-up {
+  animation: fadeUp 0.35s ease forwards;
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #0a0f1e;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e5fa8;
-  border-radius: 2px;
+  @apply bg-accent rounded-sm;
 }

@@ -88,18 +88,8 @@ export default function App() {
   const sliderPct = ((valorVeiculo - 10000) / (150000 - 10000)) * 100;
 
   return (
-    <div
-      style={{
-        minHeight: '100vh',
-        background: '#0a0f1e',
-        fontFamily: "'DM Mono', 'Courier New', monospace",
-        color: '#e8f4fd',
-        padding: '0',
-        overflowX: 'hidden',
-      }}
-    >
+    <div className='min-h-screen overflow-x-hidden'>
       <style>{`
-
         .row-card {
           background: rgba(255,255,255,0.03);
           border: 1px solid rgba(255,255,255,0.07);
@@ -129,18 +119,6 @@ export default function App() {
         .row-card.custom-card.active {
           border-color: #ffb432;
           background: rgba(255,180,50,0.08);
-        }
-        .detail-panel {
-          background: rgba(30,95,168,0.08);
-          border: 1px solid rgba(30,95,168,0.3);
-          border-radius: 16px;
-          padding: 24px;
-        }
-        .stat-block {
-          background: rgba(255,255,255,0.04);
-          border-radius: 10px;
-          padding: 14px;
-          text-align: center;
         }
         .prazo-btn {
           background: rgba(255,255,255,0.04);
@@ -172,10 +150,6 @@ export default function App() {
         }
         .custom-input:focus { border-color: #ffb432; }
 
-        .slider-wrap {
-          position: relative;
-          padding: 8px 0 4px;
-        }
         input[type=range] {
           -webkit-appearance: none;
           width: 100%;
@@ -204,38 +178,10 @@ export default function App() {
         input[type=range]::-webkit-slider-thumb:hover {
           box-shadow: 0 0 14px rgba(74,144,217,0.8);
         }
-        .bar-fill {
-          height: 6px;
-          border-radius: 3px;
-          transition: width 0.4s ease;
-        }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeUp 0.35s ease forwards; }
-        .tag-custom {
-          background: rgba(255,180,50,0.15);
-          color: #ffb432;
-          font-size: 9px;
-          padding: 2px 6px;
-          border-radius: 4px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-        }
-        .teto-badge {
-          background: rgba(42,157,92,0.15);
-          color: #2a9d5c;
-          font-size: 9px;
-          padding: 2px 7px;
-          border-radius: 4px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-        }
       `}</style>
 
       {/* Header */}
-      <div className='bg-gradient-to-br from-[#0d1b3e] to-[#0a0f1e] border-b border-[rgba(30,95,168,0.3)] relative overflow-hidden'>
+      <div className='bg-linear-to-br from-surface to-base border-b border-[rgba(30,95,168,0.3)] relative overflow-hidden'>
         <div className='max-w-lg mx-auto px-5 pt-6 pb-5'>
           <div className='absolute -top-10 -right-10 w-44 h-44 rounded-full bg-[radial-gradient(circle,rgba(30,95,168,0.25)_0%,transparent_70%)]' />
 
@@ -243,35 +189,29 @@ export default function App() {
             Move Brasil · Táxi e Aplicativos
           </div>
 
-          <div className='font-display text-2xl font-extrabold leading-tight mb-1.5 text-[#e8f4fd]'>
+          <div className='font-display text-2xl font-extrabold leading-tight mb-1.5 text-foreground'>
             Simulador de
             <br />
             Financiamento
           </div>
 
-          <div className='text-[11px] text-subtle'>
+          <div className='text-sm text-subtle'>
             Taxa teto: <span className='text-primary'>12,25% a.a.</span>
             <span className='mx-1.5 opacity-30'>·</span>
             Veículo: <span className='text-primary'>{fmt(valorVeiculo)}</span>
             {valorVeiculo === 150000 && (
-              <span className='ml-1.5 teto-badge'>teto</span>
+              <span className='ml-1.5 text-xs bg-success/15 text-success px-1.75 py-0.5 rounded tracking-[1px] uppercase'>
+                teto
+              </span>
             )}
           </div>
         </div>
       </div>
 
-      <div style={{ padding: '18px 16px', maxWidth: 520, margin: '0 auto' }}>
+      <div className='px-4 py-4.5 max-w-130 mx-auto'>
         {/* === VALOR DO VEÍCULO === */}
-        <div
-          style={{
-            marginBottom: 22,
-            background: 'rgba(74,144,217,0.05)',
-            border: '1px solid rgba(74,144,217,0.15)',
-            borderRadius: 14,
-            padding: '16px 18px',
-          }}
-        >
-          <div className='text-xs text-[#4a7080] tracking-[2px] uppercase mb-3.5'>
+        <div className='mb-5.5 bg-primary/5 border border-primary/15 rounded-[14px] px-4.5 py-4'>
+          <div className='text-xs text-subtle/70 tracking-[2px] uppercase mb-3.5'>
             Valor do veículo
           </div>
           <div className='flex flex-col gap-2 mb-3 sm:flex-row sm:items-center sm:justify-between'>
@@ -279,13 +219,13 @@ export default function App() {
               {fmt(valorVeiculo)}
             </div>
             <input
-              className='bg-white/5 border border-[rgba(74,144,217,0.4)] rounded-lg text-primary text-sm font-medium px-3 ml-auto sm:ml-0 py-2 w-full max-w-[100px] sm:w-28 outline-none text-right transition-colors duration-200 focus:border-primary'
+              className='bg-white/5 border border-[rgba(74,144,217,0.4)] rounded-lg text-primary text-sm font-medium px-3 ml-auto sm:ml-0 py-2 w-full max-w-25 sm:w-28 outline-none text-right transition-colors duration-200 focus:border-primary'
               value={inputVeiculo}
               onChange={(e) => handleValorVeiculoInput(e.target.value)}
               placeholder='Ex: 80000'
             />
           </div>
-          <div className='slider-wrap'>
+          <div className='relative py-2 pb-1'>
             <input
               type='range'
               min='10000'
@@ -295,15 +235,7 @@ export default function App() {
               onChange={(e) => handleValorVeiculoSlider(e.target.value)}
             />
           </div>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              fontSize: 10,
-              color: '#3a5060',
-              marginTop: 2,
-            }}
-          >
+          <div className='flex justify-between text-xs text-subtle/50 mt-0.5'>
             <span>R$ 10k</span>
             <span>R$ 150k (teto)</span>
           </div>
@@ -311,7 +243,7 @@ export default function App() {
 
         {/* === PRAZO === */}
         <div style={{ marginBottom: 20 }}>
-          <div className='section-label'>Prazo</div>
+          <div>Prazo</div>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {[24, 36, 48, 60, 72].map((p) => (
               <button
@@ -327,7 +259,7 @@ export default function App() {
 
         {/* === ENTRADA CUSTOMIZADA === */}
         <div style={{ marginBottom: 20 }}>
-          <div className='section-label'>Simular outra entrada</div>
+          <div>Simular outra entrada</div>
           <input
             className='custom-input'
             placeholder={`Ex: ${Math.round(valorVeiculo * 0.15).toLocaleString('pt-BR')}`}
@@ -338,7 +270,7 @@ export default function App() {
             }}
           />
           {customRow && (
-            <div style={{ fontSize: 11, color: '#ffb432', marginTop: 4 }}>
+            <div className='text-xs text-warning mt-1'>
               Entrada: {fmt(customRow.entrada)} ({customRow.pct}%) · Financia:{' '}
               {fmt(customRow.financiado)}
             </div>
@@ -346,9 +278,9 @@ export default function App() {
         </div>
 
         {/* === CENÁRIOS === */}
-        <div style={{ marginBottom: 20 }}>
-          <div className='section-label'>Cenários de entrada</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div className='mb-5'>
+          <div>Cenários de entrada</div>
+          <div className='flex flex-col gap-2'>
             {displayRows.map((row, i) => (
               <div
                 key={i}
@@ -357,40 +289,23 @@ export default function App() {
               >
                 <div>
                   <div
-                    className={`font-display text-[17px] font-bold ${row.isCustom ? 'text-warning' : 'text-primary'}`}
+                    className={`font-display text-lg font-bold ${row.isCustom ? 'text-warning' : 'text-primary'}`}
                   >
                     {row.pct}%
                   </div>
-                  {row.isCustom && <span className='tag-custom'>custom</span>}
-                  {!row.isCustom && row.entrada === 0 && (
-                    <span
-                      style={{
-                        fontSize: 9,
-                        color: '#2a9d5c',
-                        background: 'rgba(42,157,92,0.15)',
-                        padding: '2px 6px',
-                        borderRadius: 4,
-                        letterSpacing: 1,
-                        textTransform: 'uppercase',
-                      }}
-                    >
-                      zero
+                  {row.isCustom && (
+                    <span className='bg-warning/15 text-warning text-xs px-1.5 py-0.5 rounded tracking-widest uppercase'>
+                      Custom
                     </span>
                   )}
                 </div>
                 <div>
-                  <div style={{ fontSize: 10, color: '#6a8aaa' }}>entrada</div>
-                  <div style={{ fontSize: 13, fontWeight: 500 }}>
-                    {fmt(row.entrada)}
-                  </div>
+                  <div className='text-xs text-subtle'>entrada</div>
+                  <div className='text-sm font-medium'>{fmt(row.entrada)}</div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: 10, color: '#6a8aaa' }}>
-                    parcela/{prazo}x
-                  </div>
-                  <div
-                    style={{ fontSize: 14, fontWeight: 500, color: '#e8f4fd' }}
-                  >
+                  <div className='text-xs text-subtle'>parcela/{prazo}x</div>
+                  <div className='text-sm font-medium text-foreground'>
                     {fmt(row.parcela)}
                   </div>
                 </div>
@@ -401,21 +316,8 @@ export default function App() {
 
         {/* === DETALHE === */}
         {selectedRow && (
-          <div
-            className='detail-panel fade-up'
-            key={`${selected}-${prazo}-${valorVeiculo}`}
-          >
-            <div
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: 12,
-                fontWeight: 700,
-                color: '#4a90d9',
-                letterSpacing: '2px',
-                textTransform: 'uppercase',
-                marginBottom: 16,
-              }}
-            >
+          <div className='bg-accent/8 border border-accent/30 rounded-2xl p-6'>
+            <div className='font-display text-xs font-bold text-primary tracking-[2px] uppercase mb-4'>
               Detalhamento
             </div>
             <div
@@ -427,61 +329,35 @@ export default function App() {
               }}
             >
               <div className='stat-block'>
-                <div
-                  style={{ fontSize: 10, color: '#6a8aaa', marginBottom: 4 }}
-                >
-                  Entrada
-                </div>
-                <div
-                  style={{ fontSize: 18, fontWeight: 500, color: '#4a90d9' }}
-                >
+                <div className='text-xs text-subtle mb-1'>Entrada</div>
+                <div className='text-lg font-medium text-primary'>
                   {fmt(selectedRow.entrada)}
                 </div>
               </div>
               <div className='stat-block'>
-                <div
-                  style={{ fontSize: 10, color: '#6a8aaa', marginBottom: 4 }}
-                >
-                  Financiado
-                </div>
-                <div style={{ fontSize: 18, fontWeight: 500 }}>
+                <div className='text-xs text-subtle mb-1'>Financiado</div>
+                <div className='text-lg font-medium text-foreground'>
                   {fmt(selectedRow.financiado)}
                 </div>
               </div>
               <div className='stat-block'>
-                <div
-                  style={{ fontSize: 10, color: '#6a8aaa', marginBottom: 4 }}
-                >
+                <div className='text-xs text-subtle mb-1'>
                   Parcela ({prazo}x)
                 </div>
-                <div
-                  style={{ fontSize: 18, fontWeight: 500, color: '#2a9d5c' }}
-                >
+                <div className='text-lg font-medium text-success'>
                   {fmt(selectedRow.parcela)}
                 </div>
               </div>
               <div className='stat-block'>
-                <div
-                  style={{ fontSize: 10, color: '#6a8aaa', marginBottom: 4 }}
-                >
-                  Total pago
-                </div>
-                <div style={{ fontSize: 18, fontWeight: 500 }}>
+                <div className='text-xs text-subtle mb-1'>Total pago</div>
+                <div className='text-lg font-medium'>
                   {fmt(selectedRow.totalPago)}
                 </div>
               </div>
             </div>
 
             <div style={{ marginBottom: 16 }}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  fontSize: 11,
-                  color: '#6a8aaa',
-                  marginBottom: 6,
-                }}
-              >
+              <div className='flex justify-between text-xs text-subtle mb-1.5'>
                 <span>Custo do crédito (juros)</span>
                 <span style={{ color: '#e87070' }}>
                   {fmt(selectedRow.jurosTotal)}
@@ -502,7 +378,7 @@ export default function App() {
                   }}
                 />
               </div>
-              <div style={{ fontSize: 10, color: '#4a7080', marginTop: 4 }}>
+              <div className='text-xs text-subtle/70 mt-1'>
                 {(
                   (selectedRow.jurosTotal / selectedRow.financiado) *
                   100
@@ -512,16 +388,8 @@ export default function App() {
             </div>
 
             <div>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  fontSize: 11,
-                  color: '#6a8aaa',
-                  marginBottom: 6,
-                }}
-              >
-                <span style={{ color: '#4a90d9' }}>
+              <div className='flex justify-between text-xs text-subtle mb-1.5'>
+                <span className='text-primary'>
                   ▪ Entrada {selectedRow.pct}%
                 </span>
                 <span style={{ color: '#a0b4cc' }}>
@@ -538,10 +406,9 @@ export default function App() {
                 }}
               >
                 <div
-                  className='bar-fill'
+                  className='bar-fill bg-accent'
                   style={{
                     width: `${selectedRow.pct}%`,
-                    background: '#1e5fa8',
                   }}
                 />
                 <div
@@ -556,18 +423,7 @@ export default function App() {
           </div>
         )}
 
-        <div
-          style={{
-            marginTop: 16,
-            padding: '12px 14px',
-            background: 'rgba(255,180,50,0.04)',
-            border: '1px solid rgba(255,180,50,0.12)',
-            borderRadius: 10,
-            fontSize: 10,
-            color: '#7a6030',
-            lineHeight: 1.7,
-          }}
-        >
+        <div className='mt-4 px-3.5 py-3 bg-warning/4 border border-warning/12 rounded-xs text-xs text-[#7a6030] leading-[1.7]'>
           ⚠ Taxa teto de 12,25% a.a. = 2,5% (governo) + 8,5% (banco) + 1,25%
           (BNDES). Taxa real depende da instituição. Máximo elegível: R$
           150.000. Disponível a partir de 19/06/2026.
