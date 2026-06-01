@@ -237,16 +237,16 @@ export default function App() {
               onChange={(e) => handleValorVeiculoSlider(e.target.value)}
             />
           </div>
-          <div className='flex justify-between text-xs text-subtle/90 mt-0.5'>
+          <div className='flex justify-between text-xs text-subtle mt-0.5'>
             <span>R$ 10k</span>
             <span>R$ 150k (teto)</span>
           </div>
         </div>
 
         {/* === PRAZO === */}
-        <div style={{ marginBottom: 20 }}>
+        <div className='mb-5'>
           <div>Prazo</div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <div className='flex gap-2 flex-wrap'>
             {[24, 36, 48, 60, 72].map((p) => (
               <button
                 key={p}
@@ -260,7 +260,7 @@ export default function App() {
         </div>
 
         {/* === ENTRADA CUSTOMIZADA === */}
-        <div style={{ marginBottom: 20 }}>
+        <div className='mb-5'>
           <div>Simular outra entrada</div>
           <input
             aria-label='Valor de entrada personalizado'
@@ -323,14 +323,7 @@ export default function App() {
             <div className='font-display text-xs font-bold text-primary tracking-[2px] uppercase mb-4'>
               Detalhamento
             </div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: 10,
-                marginBottom: 16,
-              }}
-            >
+            <div className='grid grid-cols-2 gap-2.5 mb-4'>
               <div className='stat-block'>
                 <div className='text-xs text-subtle mb-1'>Entrada</div>
                 <div className='text-lg font-medium text-primary'>
@@ -359,7 +352,7 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ marginBottom: 16 }}>
+            <div className='mb-4'>
               <div className='flex justify-between text-xs text-subtle mb-1.5'>
                 <span>Custo do crédito (juros)</span>
                 <span style={{ color: '#e87070' }}>
