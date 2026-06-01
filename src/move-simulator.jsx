@@ -26,7 +26,7 @@ export default function App() {
   const [customEntrada, setCustomEntrada] = useState('');
   const [prazo, setPrazo] = useState(72);
   const [valorVeiculo, setValorVeiculo] = useState(150000);
-  const [inputVeiculo, setInputVeiculo] = useState('150000');
+  const [inputVeiculo, setInputVeiculo] = useState('150.000');
 
   const entradaCustomVal =
     customEntrada !== ''
@@ -76,8 +76,8 @@ export default function App() {
   };
 
   const handleValorVeiculoInput = (v) => {
-    setInputVeiculo(v);
     const num = parseInt(v.replace(/\D/g, '')) || 0;
+    setInputVeiculo(num.toLocaleString('pt-BR'));
     if (num >= 10000 && num <= 150000) {
       setValorVeiculo(num);
       setSelected(0);
@@ -99,11 +99,6 @@ export default function App() {
       }}
     >
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #0a0f1e; }
-        ::-webkit-scrollbar-thumb { background: #1e5fa8; border-radius: 2px; }
 
         .row-card {
           background: rgba(255,255,255,0.03);
@@ -177,22 +172,6 @@ export default function App() {
         }
         .custom-input:focus { border-color: #ffb432; }
 
-        .veiculo-input {
-          background: rgba(255,255,255,0.05);
-          border: 1px solid rgba(74,144,217,0.4);
-          border-radius: 8px;
-          color: #4a90d9;
-          font-family: inherit;
-          font-size: 14px;
-          font-weight: 500;
-          padding: 8px 12px;
-          width: 130px;
-          outline: none;
-          text-align: right;
-          transition: border-color 0.2s;
-        }
-        .veiculo-input:focus { border-color: #4a90d9; }
-
         .slider-wrap {
           position: relative;
           padding: 8px 0 4px;
@@ -253,70 +232,31 @@ export default function App() {
           letter-spacing: 1px;
           text-transform: uppercase;
         }
-        .section-label {
-          font-size: 11px;
-          color: #4a7080;
-          letter-spacing: 2px;
-          text-transform: uppercase;
-          margin-bottom: 10px;
-        }
       `}</style>
 
       {/* Header */}
-      <div
-        style={{
-          background: 'linear-gradient(135deg, #0d1b3e 0%, #0a0f1e 100%)',
-          borderBottom: '1px solid rgba(30,95,168,0.3)',
-          padding: '24px 20px 18px',
-          position: 'relative',
-          overflow: 'hidden',
-        }}
-      >
-        <div
-          style={{
-            position: 'absolute',
-            top: '-40px',
-            right: '-40px',
-            width: '180px',
-            height: '180px',
-            background:
-              'radial-gradient(circle, rgba(30,95,168,0.25) 0%, transparent 70%)',
-            borderRadius: '50%',
-          }}
-        />
-        <div
-          style={{
-            fontSize: 10,
-            color: '#4a90d9',
-            letterSpacing: '3px',
-            textTransform: 'uppercase',
-            marginBottom: 6,
-          }}
-        >
-          Move Brasil · Táxi e Aplicativos
-        </div>
-        <div
-          style={{
-            fontFamily: "'Syne', sans-serif",
-            fontSize: 24,
-            fontWeight: 800,
-            lineHeight: 1.1,
-            marginBottom: 6,
-          }}
-        >
-          Simulador de
-          <br />
-          Financiamento
-        </div>
-        <div style={{ fontSize: 11, color: '#6a8aaa' }}>
-          Taxa teto: <span style={{ color: '#4a90d9' }}>12,25% a.a.</span>
-          <span style={{ margin: '0 6px', opacity: 0.3 }}>·</span>
-          Veículo: <span style={{ color: '#4a90d9' }}>{fmt(valorVeiculo)}</span>
-          {valorVeiculo === 150000 && (
-            <span style={{ marginLeft: 6 }} className='teto-badge'>
-              teto
-            </span>
-          )}
+      <div className='bg-gradient-to-br from-[#0d1b3e] to-[#0a0f1e] border-b border-[rgba(30,95,168,0.3)] relative overflow-hidden'>
+        <div className='max-w-lg mx-auto px-5 pt-6 pb-5'>
+          <div className='absolute -top-10 -right-10 w-44 h-44 rounded-full bg-[radial-gradient(circle,rgba(30,95,168,0.25)_0%,transparent_70%)]' />
+
+          <div className='text-xs text-primary tracking-[3px] uppercase mb-1.5'>
+            Move Brasil · Táxi e Aplicativos
+          </div>
+
+          <div className='font-display text-2xl font-extrabold leading-tight mb-1.5 text-[#e8f4fd]'>
+            Simulador de
+            <br />
+            Financiamento
+          </div>
+
+          <div className='text-[11px] text-subtle'>
+            Taxa teto: <span className='text-primary'>12,25% a.a.</span>
+            <span className='mx-1.5 opacity-30'>·</span>
+            Veículo: <span className='text-primary'>{fmt(valorVeiculo)}</span>
+            {valorVeiculo === 150000 && (
+              <span className='ml-1.5 teto-badge'>teto</span>
+            )}
+          </div>
         </div>
       </div>
 
@@ -331,29 +271,15 @@ export default function App() {
             padding: '16px 18px',
           }}
         >
-          <div className='section-label' style={{ marginBottom: 14 }}>
+          <div className='text-xs text-[#4a7080] tracking-[2px] uppercase mb-3.5'>
             Valor do veículo
           </div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              marginBottom: 12,
-            }}
-          >
-            <div
-              style={{
-                fontFamily: "'Syne', sans-serif",
-                fontSize: 28,
-                fontWeight: 800,
-                color: '#4a90d9',
-              }}
-            >
+          <div className='flex flex-col gap-2 mb-3 sm:flex-row sm:items-center sm:justify-between'>
+            <div className='font-display text-3xl font-extrabold text-primary'>
               {fmt(valorVeiculo)}
             </div>
             <input
-              className='veiculo-input'
+              className='bg-white/5 border border-[rgba(74,144,217,0.4)] rounded-lg text-primary text-sm font-medium px-3 ml-auto sm:ml-0 py-2 w-full max-w-[100px] sm:w-28 outline-none text-right transition-colors duration-200 focus:border-primary'
               value={inputVeiculo}
               onChange={(e) => handleValorVeiculoInput(e.target.value)}
               placeholder='Ex: 80000'
@@ -431,12 +357,7 @@ export default function App() {
               >
                 <div>
                   <div
-                    style={{
-                      fontFamily: "'Syne', sans-serif",
-                      fontSize: 17,
-                      fontWeight: 700,
-                      color: row.isCustom ? '#ffb432' : '#4a90d9',
-                    }}
+                    className={`font-display text-[17px] font-bold ${row.isCustom ? 'text-warning' : 'text-primary'}`}
                   >
                     {row.pct}%
                   </div>

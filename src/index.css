@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@700;800&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'DM Mono', 'Courier New', monospace;
+  --color-primary: #4a90d9;
+  --color-subtle: #6a8aaa;
+  --color-success: #2a9d5c;
+  --color-warning: #ffb432;
+  --color-base: #0a0f1e;
+  --color-surface: #0d1b3e;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f1e;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e5fa8;
+  border-radius: 2px;
+}
