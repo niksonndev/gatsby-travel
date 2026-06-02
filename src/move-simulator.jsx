@@ -1,24 +1,10 @@
 import { useState } from 'react';
+import ScenarioList from './components/ScenarioList';
+import { calcPMT } from './utils/calculations';
+import { fmt, fmtShort } from './utils/format';
 
 const TAXA_ANUAL_TETO = 12.25;
 const ENTRADAS_PCT = [0, 10, 20, 30, 40, 50];
-
-function calcPMT(principal, taxaMensal, meses) {
-  if (taxaMensal === 0) return principal / meses;
-  return (
-    (principal * taxaMensal * Math.pow(1 + taxaMensal, meses)) /
-    (Math.pow(1 + taxaMensal, meses) - 1)
-  );
-}
-
-function fmt(v) {
-  return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-function fmtShort(v) {
-  if (v >= 1000) return `R$ ${(v / 1000).toFixed(0)}k`;
-  return fmt(v);
-}
 
 export default function App() {
   const taxaMensal = Math.pow(1 + TAXA_ANUAL_TETO / 100, 1 / 12) - 1;
@@ -265,41 +251,12 @@ export default function App() {
         </div>
 
         {/* === CENÁRIOS === */}
-        <div className='mb-5'>
-          <div>Cenários de entrada</div>
-          <div className='flex flex-col gap-2'>
-            {displayRows.map((row, i) => (
-              <div
-                key={i}
-                className={`row-card ${selected === i ? 'active' : ''} ${row.isCustom ? 'custom-card' : ''}`}
-                onClick={() => setSelected(i)}
-              >
-                <div>
-                  <div
-                    className={`font-display text-lg font-bold ${row.isCustom ? 'text-warning' : 'text-primary'}`}
-                  >
-                    {row.pct}%
-                  </div>
-                  {row.isCustom && (
-                    <span className='bg-warning/15 text-warning text-xs px-1.5 py-0.5 rounded tracking-widest uppercase'>
-                      Custom
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <div className='text-xs text-subtle'>entrada</div>
-                  <div className='text-sm font-medium'>{fmt(row.entrada)}</div>
-                </div>
-                <div className='text-right'>
-                  <div className='text-xs text-subtle'>parcela/{prazo}x</div>
-                  <div className='text-sm font-medium text-foreground'>
-                    {fmt(row.parcela)}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        <ScenarioList
+          displayRows={displayRows}
+          selected={selected}
+          onSelectScenario={setSelected}
+          prazo={prazo}
+        />
 
         {/* === DETALHE === */}
         {selectedRow && (
