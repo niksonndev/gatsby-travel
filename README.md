@@ -1,14 +1,19 @@
 # Move Brasil · Financing Simulator
 
-A clean, interactive financing simulator for the **Move Aplicativos** program — the Brazilian federal government's credit line for taxi drivers and rideshare app drivers (Uber, 99, etc.).
+A clean, interactive financing simulator for the **Move Brasil** program — the Brazilian federal government's credit line for taxi drivers and rideshare app drivers (Uber, 99, etc.).
 
 Live at **[niksonndev.github.io/move-brasil](https://niksonndev.github.io/move-brasil/)**
+
+## Screenshots
+
+![Desktop](assets/move-brasil-desktop.png)
+![Mobile](assets/move-brasil-mobile.png)
 
 ---
 
 ## About the Program
 
-Move Aplicativos is a federal initiative offering subsidized vehicle financing to registered taxi drivers and active rideshare drivers. Key terms:
+Move Brasil is a federal initiative offering subsidized vehicle financing to registered taxi drivers and active rideshare drivers. Key terms:
 
 - Vehicle value up to **R$ 150,000**
 - Rate ceiling: **12.25% p.a.** (2.5% government + 8.5% bank + 1.25% BNDES)
